@@ -34,7 +34,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "react-only-when": "^1.0.2",
-    "react-swipeable": "6.1.2",
+    "react-swipeable": "github:vitaliy-hnatyk/react-swipeable#5.x",
     "resize-observer-polyfill": "1.5.0"
   },
   "peerDependencies": {
@@ -91,7 +91,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-resizable": "^1.7.5",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "4.0.3",
     "react-test-renderer": "^16.5.2",
     "rollup": "^0.64.1",
     "rollup-plugin-alias": "^1.4.0",
