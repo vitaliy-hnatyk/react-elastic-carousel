@@ -581,7 +581,7 @@ var Track = function Track(_ref) {
       onClick: onItemClick
     }, childToRender));
   });
-  var toRender = enableSwipe ? /*#__PURE__*/React__default.createElement(reactSwipeable.Swipeable, {
+  return enableSwipe ? /*#__PURE__*/React__default.createElement(reactSwipeable.Swipeable, {
     style: {
       display: "flex",
       flexDirection: verticalMode ? "column" : "row"
@@ -593,18 +593,18 @@ var Track = function Track(_ref) {
     onSwiping: onSwiping,
     className: cssPrefix("swipable")
   }, originalChildren) : originalChildren;
-  return toRender;
 };
 
 Track.propTypes = {
   children: PropTypes.array.isRequired,
   itemsToShow: PropTypes.number.isRequired,
-  noAutoTabbedItems: PropTypes.bool,
+  autoTabIndexVisibleItems: PropTypes.bool,
   currentItem: PropTypes.number.isRequired,
   itemPosition: PropTypes.string,
   itemPadding: PropTypes.array,
   childWidth: PropTypes.number,
   verticalMode: PropTypes.bool,
+  itemsToScroll: PropTypes.number,
   enableSwipe: PropTypes.bool,
   enableMouseSwipe: PropTypes.bool,
   preventDefaultTouchmoveEvent: PropTypes.bool,
@@ -674,15 +674,13 @@ var activeIndexReducer = function activeIndexReducer(state, action) {
     case NEXT_ITEM:
       {
         var optimisticNextItem = state + itemsToScroll;
-        var nextItem = limit >= optimisticNextItem ? optimisticNextItem : limit;
-        return nextItem;
+        return limit >= optimisticNextItem ? optimisticNextItem : limit;
       }
 
     case PREV_ITEM:
       {
         var optimisticPrevItem = state - itemsToScroll;
-        var prevItem = optimisticPrevItem >= limit ? optimisticPrevItem : limit;
-        return prevItem;
+        return optimisticPrevItem >= limit ? optimisticPrevItem : limit;
       }
 
     default:
@@ -1060,7 +1058,7 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
 
 
       var childrenLength = React.Children.toArray(children).length || 1;
-      var childWidth = 0;
+      var childWidth;
 
       if (verticalMode) {
         childWidth = sliderContainerWidth;
@@ -1180,8 +1178,7 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
       }
 
       var nextAction = getPrev ? prevItemAction(0, itemsToScroll) : nextItemAction(limit, itemsToScroll);
-      var nextItem = activeIndexReducer(currentIndex, nextAction);
-      return nextItem;
+      return activeIndexReducer(currentIndex, nextAction);
     });
 
     _defineProperty(_assertThisInitialized(_this), "getNextItemObj", function (getPrev) {
@@ -1195,11 +1192,10 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
 
       var roundedIdx = Math.round(nextItemIndex);
       var asElement = React.Children.toArray(children)[roundedIdx];
-      var asObj = {
+      return {
         item: asElement.props,
         index: roundedIdx
       };
-      return asObj;
     });
 
     _defineProperty(_assertThisInitialized(_this), "resetSwipe", function () {
@@ -1524,7 +1520,7 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
 
         var childWidth = _this.calculateChildWidth();
 
-        var newSliderPosition = 0;
+        var newSliderPosition;
         var childSize = verticalMode ? childHeight : childWidth;
 
         if (direction === consts.NEXT) {

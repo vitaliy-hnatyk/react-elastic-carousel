@@ -259,7 +259,7 @@ class Carousel extends React.Component {
         */
     const childrenLength = Children.toArray(children).length || 1;
 
-    let childWidth = 0;
+    let childWidth;
     if (verticalMode) {
       childWidth = sliderContainerWidth;
     } else {
@@ -373,8 +373,7 @@ class Carousel extends React.Component {
     const nextAction = getPrev
       ? prevItemAction(0, itemsToScroll)
       : nextItemAction(limit, itemsToScroll);
-    const nextItem = activeIndexReducer(currentIndex, nextAction);
-    return nextItem;
+    return activeIndexReducer(currentIndex, nextAction);
   };
 
   getNextItemObj = getPrev => {
@@ -384,8 +383,7 @@ class Carousel extends React.Component {
     // support decimal itemsToShow
     const roundedIdx = Math.round(nextItemIndex);
     const asElement = Children.toArray(children)[roundedIdx];
-    const asObj = { item: asElement.props, index: roundedIdx };
-    return asObj;
+    return { item: asElement.props, index: roundedIdx };
   };
 
   resetSwipe = () => {
@@ -666,7 +664,7 @@ class Carousel extends React.Component {
     const { sliderPosition, childHeight, activeIndex } = state;
     const childWidth = this.calculateChildWidth();
 
-    let newSliderPosition = 0;
+    let newSliderPosition;
     const childSize = verticalMode ? childHeight : childWidth;
     if (direction === consts.NEXT) {
       newSliderPosition =

@@ -5,14 +5,12 @@ export const activeIndexReducer = (state, action) => {
   switch (type) {
     case NEXT_ITEM: {
       let optimisticNextItem = state + itemsToScroll;
-      const nextItem = limit >= optimisticNextItem ? optimisticNextItem : limit;
-      return nextItem;
+      return limit >= optimisticNextItem ? optimisticNextItem : limit;
     }
 
     case PREV_ITEM: {
       let optimisticPrevItem = state - itemsToScroll;
-      const prevItem = optimisticPrevItem >= limit ? optimisticPrevItem : limit;
-      return prevItem;
+      return optimisticPrevItem >= limit ? optimisticPrevItem : limit;
     }
 
     default:

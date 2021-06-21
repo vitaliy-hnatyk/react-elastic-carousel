@@ -61,7 +61,7 @@ const Track = ({
       </div>
     );
   });
-  const toRender = enableSwipe ? (
+  return enableSwipe ? (
     <Swipeable
       style={{
         display: "flex",
@@ -79,18 +79,18 @@ const Track = ({
   ) : (
     originalChildren
   );
-  return toRender;
 };
 
 Track.propTypes = {
   children: PropTypes.array.isRequired,
   itemsToShow: PropTypes.number.isRequired,
-  noAutoTabbedItems: PropTypes.bool,
+  autoTabIndexVisibleItems: PropTypes.bool,
   currentItem: PropTypes.number.isRequired,
   itemPosition: PropTypes.string,
   itemPadding: PropTypes.array,
   childWidth: PropTypes.number,
   verticalMode: PropTypes.bool,
+  itemsToScroll: PropTypes.number,
   enableSwipe: PropTypes.bool,
   enableMouseSwipe: PropTypes.bool,
   preventDefaultTouchmoveEvent: PropTypes.bool,
